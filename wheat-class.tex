@@ -1,0 +1,719 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Final - R}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} wheat \PY{o}{\PYZlt{}\PYZhy{}} read.csv\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{wheat.csv\PYZdq{}}\PY{p}{,} header \PY{o}{=} \PY{n+nb+bp}{T}\PY{p}{)}
+        wheat
+\end{Verbatim}
+
+
+    A data.frame: 200 × 8
+\begin{tabular}{r|llllllll}
+ area & perimeter & compactness & length & width & asymmetry & groove & type\\
+ <dbl> & <dbl> & <dbl> & <dbl> & <dbl> & <dbl> & <dbl> & <fct>\\
+\hline
+	 15.26 & 14.84 & 0.8710 & 5.763 & 3.312 & 2.2210 & 5.220 & A\\
+	 14.88 & 14.57 & 0.8811 & 5.554 & 3.333 & 1.0180 & 4.956 & A\\
+	 14.29 & 14.09 & 0.9050 & 5.291 & 3.337 & 2.6990 & 4.825 & A\\
+	 13.84 & 13.94 & 0.8955 & 5.324 & 3.379 & 2.2590 & 4.805 & A\\
+	 16.14 & 14.99 & 0.9034 & 5.658 & 3.562 & 1.3550 & 5.175 & A\\
+	 14.38 & 14.21 & 0.8951 & 5.386 & 3.312 & 2.4620 & 4.956 & A\\
+	 14.69 & 14.49 & 0.8799 & 5.563 & 3.259 & 3.5860 & 5.219 & A\\
+	 14.11 & 14.10 & 0.8911 & 5.420 & 3.302 & 2.7000 & 5.000 & A\\
+	 16.63 & 15.46 & 0.8747 & 6.053 & 3.465 & 2.0400 & 5.877 & A\\
+	 16.44 & 15.25 & 0.8880 & 5.884 & 3.505 & 1.9690 & 5.533 & A\\
+	 15.26 & 14.85 & 0.8696 & 5.714 & 3.242 & 4.5430 & 5.314 & A\\
+	 14.03 & 14.16 & 0.8796 & 5.438 & 3.201 & 1.7170 & 5.001 & A\\
+	 13.89 & 14.02 & 0.8880 & 5.439 & 3.199 & 3.9860 & 4.738 & A\\
+	 13.78 & 14.06 & 0.8759 & 5.479 & 3.156 & 3.1360 & 4.872 & A\\
+	 13.74 & 14.05 & 0.8744 & 5.482 & 3.114 & 2.9320 & 4.825 & A\\
+	 14.59 & 14.28 & 0.8993 & 5.351 & 3.333 & 4.1850 & 4.781 & A\\
+	 13.99 & 13.83 & 0.9183 & 5.119 & 3.383 & 5.2340 & 4.781 & A\\
+	 15.69 & 14.75 & 0.9058 & 5.527 & 3.514 & 1.5990 & 5.046 & A\\
+	 14.70 & 14.21 & 0.9153 & 5.205 & 3.466 & 1.7670 & 4.649 & A\\
+	 12.72 & 13.57 & 0.8686 & 5.226 & 3.049 & 4.1020 & 4.914 & A\\
+	 14.16 & 14.40 & 0.8584 & 5.658 & 3.129 & 3.0720 & 5.176 & A\\
+	 14.11 & 14.26 & 0.8722 & 5.520 & 3.168 & 2.6880 & 5.219 & A\\
+	 15.88 & 14.90 & 0.8988 & 5.618 & 3.507 & 0.7651 & 5.091 & A\\
+	 12.08 & 13.23 & 0.8664 & 5.099 & 2.936 & 1.4150 & 4.961 & A\\
+	 15.01 & 14.76 & 0.8657 & 5.789 & 3.245 & 1.7910 & 5.001 & A\\
+	 16.19 & 15.16 & 0.8849 & 5.833 & 3.421 & 0.9030 & 5.307 & A\\
+	 13.02 & 13.76 & 0.8641 & 5.395 & 3.026 & 3.3730 & 4.825 & A\\
+	 12.74 & 13.67 & 0.8564 & 5.395 & 2.956 & 2.5040 & 4.869 & A\\
+	 14.11 & 14.18 & 0.8820 & 5.541 & 3.221 & 2.7540 & 5.038 & A\\
+	 13.45 & 14.02 & 0.8604 & 5.516 & 3.065 & 3.5310 & 5.097 & A\\
+	 ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮\\
+	 11.48 & 13.05 & 0.8473 & 5.180 & 2.758 & 5.876 & 5.002 & C\\
+	 12.21 & 13.47 & 0.8453 & 5.357 & 2.893 & 1.661 & 5.178 & C\\
+	 11.41 & 12.95 & 0.8560 & 5.090 & 2.775 & 4.957 & 4.825 & C\\
+	 12.46 & 13.41 & 0.8706 & 5.236 & 3.017 & 4.987 & 5.147 & C\\
+	 12.19 & 13.36 & 0.8579 & 5.240 & 2.909 & 4.857 & 5.158 & C\\
+	 11.65 & 13.07 & 0.8575 & 5.108 & 2.850 & 5.209 & 5.135 & C\\
+	 12.89 & 13.77 & 0.8541 & 5.495 & 3.026 & 6.185 & 5.316 & C\\
+	 11.81 & 13.45 & 0.8198 & 5.413 & 2.716 & 4.898 & 5.352 & C\\
+	 10.91 & 12.80 & 0.8372 & 5.088 & 2.675 & 4.179 & 4.956 & C\\
+	 11.23 & 12.82 & 0.8594 & 5.089 & 2.821 & 7.524 & 4.957 & C\\
+	 10.59 & 12.41 & 0.8648 & 4.899 & 2.787 & 4.975 & 4.794 & C\\
+	 10.93 & 12.80 & 0.8390 & 5.046 & 2.717 & 5.398 & 5.045 & C\\
+	 11.27 & 12.86 & 0.8563 & 5.091 & 2.804 & 3.985 & 5.001 & C\\
+	 11.87 & 13.02 & 0.8795 & 5.132 & 2.953 & 3.597 & 5.132 & C\\
+	 12.11 & 13.27 & 0.8639 & 5.236 & 2.975 & 4.132 & 5.012 & C\\
+	 12.80 & 13.47 & 0.8860 & 5.160 & 3.126 & 4.873 & 4.914 & C\\
+	 12.79 & 13.53 & 0.8786 & 5.224 & 3.054 & 5.483 & 4.958 & C\\
+	 13.37 & 13.78 & 0.8849 & 5.320 & 3.128 & 4.670 & 5.091 & C\\
+	 12.62 & 13.67 & 0.8481 & 5.410 & 2.911 & 3.306 & 5.231 & C\\
+	 12.76 & 13.38 & 0.8964 & 5.073 & 3.155 & 2.828 & 4.830 & C\\
+	 12.38 & 13.44 & 0.8609 & 5.219 & 2.989 & 5.472 & 5.045 & C\\
+	 12.67 & 13.32 & 0.8977 & 4.984 & 3.135 & 2.300 & 4.745 & C\\
+	 11.18 & 12.72 & 0.8680 & 5.009 & 2.810 & 4.051 & 4.828 & C\\
+	 12.70 & 13.41 & 0.8874 & 5.183 & 3.091 & 8.456 & 5.000 & C\\
+	 12.37 & 13.47 & 0.8567 & 5.204 & 2.960 & 3.919 & 5.001 & C\\
+	 12.19 & 13.20 & 0.8783 & 5.137 & 2.981 & 3.631 & 4.870 & C\\
+	 11.23 & 12.88 & 0.8511 & 5.140 & 2.795 & 4.325 & 5.003 & C\\
+	 13.20 & 13.66 & 0.8883 & 5.236 & 3.232 & 8.315 & 5.056 & C\\
+	 11.84 & 13.21 & 0.8521 & 5.175 & 2.836 & 3.598 & 5.044 & C\\
+	 12.30 & 13.34 & 0.8684 & 5.243 & 2.974 & 5.637 & 5.063 & C\\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k+kp}{options}\PY{p}{(}repr.matrix.max.rows\PY{o}{=}\PY{l+m}{600}\PY{p}{,} repr.matrix.max.cols\PY{o}{=}\PY{l+m}{200}\PY{p}{)}
+         \PY{k+kp}{is.na}\PY{p}{(}wheat\PY{p}{)} 
+         \PY{c+c1}{\PYZsh{}There are no missing values}
+\end{Verbatim}
+
+
+    A matrix: 200 × 8 of type lgl
+\begin{tabular}{llllllll}
+ area & perimeter & compactness & length & width & asymmetry & groove & type\\
+\hline
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+	 FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{k+kp}{summary}\PY{p}{(}wheat\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}The magnitudes and ranges of each column are quite different. Area column has }
+         \PY{c+c1}{\PYZsh{}range \PYZti{}10 whereas compactness column has range \PYZti{}0.1}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+      area         perimeter      compactness         length     
+ Min.   :10.59   Min.   :12.41   Min.   :0.8081   Min.   :4.899  
+ 1st Qu.:12.38   1st Qu.:13.47   1st Qu.:0.8583   1st Qu.:5.257  
+ Median :14.40   Median :14.38   Median :0.8745   Median :5.534  
+ Mean   :14.94   Mean   :14.60   Mean   :0.8721   Mean   :5.639  
+ 3rd Qu.:17.41   3rd Qu.:15.78   3rd Qu.:0.8879   3rd Qu.:6.009  
+ Max.   :21.18   Max.   :17.25   Max.   :0.9183   Max.   :6.675  
+     width         asymmetry          groove      type  
+ Min.   :2.642   Min.   :0.7651   Min.   :4.519   A:68  
+ 1st Qu.:2.965   1st Qu.:2.4935   1st Qu.:5.043   B:69  
+ Median :3.252   Median :3.5915   Median :5.226   C:63  
+ Mean   :3.273   Mean   :3.6627   Mean   :5.414         
+ 3rd Qu.:3.564   3rd Qu.:4.7043   3rd Qu.:5.879         
+ Max.   :4.033   Max.   :8.4560   Max.   :6.550         
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{k+kn}{library}\PY{p}{(}caret\PY{p}{)}
+         train\PYZus{}rows \PY{o}{\PYZlt{}\PYZhy{}} createDataPartition\PY{p}{(}y \PY{o}{=} wheat\PY{o}{\PYZdl{}}type\PY{p}{,} p \PY{o}{=} \PY{l+m}{0.8}\PY{p}{,} \PY{k+kt}{list} \PY{o}{=} \PY{n+nb+bp}{F}\PY{p}{)}
+         training \PY{o}{\PYZlt{}\PYZhy{}} wheat\PY{p}{[}train\PYZus{}rows\PY{p}{,} \PY{p}{]}
+         testing \PY{o}{\PYZlt{}\PYZhy{}} wheat\PY{p}{[}\PY{o}{\PYZhy{}}train\PYZus{}rows\PY{p}{,} \PY{p}{]}
+         trctrl \PY{o}{\PYZlt{}\PYZhy{}} trainControl\PY{p}{(}method \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{repeatedcv\PYZdq{}}\PY{p}{,} number\PY{o}{=}\PY{l+m}{10}\PY{p}{,} repeats \PY{o}{=} \PY{l+m}{3}\PY{p}{)}
+         svm\PYZus{}linear \PY{o}{\PYZlt{}\PYZhy{}} train\PY{p}{(}type \PY{o}{\PYZti{}} \PY{l+m}{.}\PY{p}{,} data \PY{o}{=} training\PY{p}{,} method \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{svmLinear\PYZdq{}}\PY{p}{,} trControl \PY{o}{=} trctrl\PY{p}{,} preProcess \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{center\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{scale\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         svm\PYZus{}linear
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+Support Vector Machines with Linear Kernel 
+
+162 samples
+  7 predictor
+  3 classes: 'A', 'B', 'C' 
+
+Pre-processing: centered (7), scaled (7) 
+Resampling: Cross-Validated (10 fold, repeated 3 times) 
+Summary of sample sizes: 147, 145, 147, 146, 145, 145, ... 
+Resampling results:
+
+  Accuracy   Kappa    
+  0.9151879  0.8727125
+
+Tuning parameter 'C' was held constant at a value of 1
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} testing\PYZus{}pred \PY{o}{\PYZlt{}\PYZhy{}} predict\PY{p}{(}svm\PYZus{}linear\PY{p}{,} newdata \PY{o}{=} testing\PY{p}{)}
+         confusionMatrix\PY{p}{(}testing\PYZus{}pred\PY{p}{,} testing\PY{o}{\PYZdl{}}type\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}There\PYZsq{}s only one false prediction out of 68 rows of data and the accuracy }
+         \PY{c+c1}{\PYZsh{}is 97\PYZpc{}. The model is pretty accurate in associating 7 attributes with wheat type}
+         \PY{c+c1}{\PYZsh{}and predicting the wheat type correctly}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+Confusion Matrix and Statistics
+
+          Reference
+Prediction  A  B  C
+         A 12  0  0
+         B  0 13  0
+         C  1  0 12
+
+Overall Statistics
+                                          
+               Accuracy : 0.9737          
+                 95% CI : (0.8619, 0.9993)
+    No Information Rate : 0.3421          
+    P-Value [Acc > NIR] : < 2.2e-16       
+                                          
+                  Kappa : 0.9605          
+ Mcnemar's Test P-Value : NA              
+
+Statistics by Class:
+
+                     Class: A Class: B Class: C
+Sensitivity            0.9231   1.0000   1.0000
+Specificity            1.0000   1.0000   0.9615
+Pos Pred Value         1.0000   1.0000   0.9231
+Neg Pred Value         0.9615   1.0000   1.0000
+Prevalence             0.3421   0.3421   0.3158
+Detection Rate         0.3158   0.3421   0.3158
+Detection Prevalence   0.3158   0.3421   0.3421
+Balanced Accuracy      0.9615   1.0000   0.9808
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "There's only one false prediction out of 68 rows of data and the accuracy \textbackslash{}n is 97\%. The model is pretty accurate in associating 7 attributes with wheat type\textbackslash{}n and predicting the wheat type correctly"
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{c+c1}{\PYZsh{}classifications on unknown data}
+         unknown \PY{o}{\PYZlt{}\PYZhy{}} read.csv\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{wheat\PYZhy{}unknown.csv\PYZdq{}}\PY{p}{,} header \PY{o}{=} \PY{n+nb+bp}{T}\PY{p}{)}
+         pred \PY{o}{\PYZlt{}\PYZhy{}} predict\PY{p}{(}svm\PYZus{}linear\PY{p}{,} newdata \PY{o}{=} unknown\PY{p}{)}
+         \PY{k+kp}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{The predictions for the unknown wheat seeds are as follows, with 91.5\PYZpc{} accuracy:\PYZdq{}}\PY{p}{)}
+         pred
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "The predictions for the unknown wheat seeds are as follows, with 91.5\% accuracy:"
+
+    \end{Verbatim}
+
+    \begin{enumerate*}
+\item C
+\item A
+\item C
+\item C
+\item C
+\item C
+\item A
+\item C
+\item C
+\item B
+\end{enumerate*}
+
+\emph{Levels}: \begin{enumerate*}
+\item 'A'
+\item 'B'
+\item 'C'
+\end{enumerate*}
+
+
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
