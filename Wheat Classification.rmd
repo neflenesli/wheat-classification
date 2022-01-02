@@ -1,3 +1,4 @@
+output: rmarkdown::github_document
 
 wheat <- read.csv("wheat.csv", header = T)
 wheat
